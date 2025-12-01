@@ -25,8 +25,7 @@ class Assembler:
                 
         return {"A": opcode, "B": operand}
     
-    def encode_instruction(self, instruction):
-        """Кодирование инструкции в машинное представление (4 байта)"""
+    def encode_instruction(self, instruction): # Транслятор из промежуточного в машинное представление
         a = instruction["A"]
         b = instruction["B"]
         
@@ -47,7 +46,7 @@ class Assembler:
             # Для неизвестных команд возвращаем нулевые байты
             return bytes([0x00, 0x00, 0x00, 0x00])
     
-    def assemble(self, input_file, output_file, test_mode=False):
+    def assemble(self, input_file, output_file, test_mode=False): # Запись результата в двоичный файл
         try:
             with open(input_file, 'r', encoding='utf-8') as f:
                 program = json.load(f)
@@ -121,8 +120,7 @@ class Assembler:
         if all_match and len(self.instructions) >= len(spec_tests):
             print("Все тестовые примеры из задания пройдены успешно!")
     
-    def display_machine_code(self):
-        """Вывод машинного кода в байтовом формате"""
+    def display_machine_code(self): # Вывод машинного кода в байтовом формате
         print("\nМашинный код программы:")
         for i, instruction in enumerate(self.instructions):
             machine_code = self.encode_instruction(instruction)
@@ -131,7 +129,6 @@ class Assembler:
 
 def main():
     if len(sys.argv) < 3:
-        print("Ассемблер для Учебной Виртуальной Машины (Вариант 2)")
         print("Использование: python main.py <input.json> <output.bin> [--test]")
         print()
         print("Аргументы:")
@@ -147,7 +144,7 @@ def main():
     print("Запуск ассемблера УВМ")
     print(f"   Входной файл: {input_file}")
     print(f"   Выходной файл: {output_file}")
-    print(f"   Режим тестирования: {'ВКЛ' if test_mode else 'ВЫКЛ'}")
+    print(f"   Режим тестирования: {'вкл' if test_mode else 'выкл'}")
     
     assembler = Assembler()
     

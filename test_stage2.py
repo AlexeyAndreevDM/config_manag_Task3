@@ -17,7 +17,6 @@ def test_stage2():
         json.dump(test_program, f, indent=2)
     
     # Запускаем ассемблер в тестовом режиме
-    print("Запуск ассемблера с тестовой программой")
     result = subprocess.run([
         "python", "main.py", "test_stage2.json", "test_output.bin", "--test"
     ], capture_output=True, text=True)
